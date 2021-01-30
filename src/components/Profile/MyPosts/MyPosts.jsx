@@ -5,25 +5,30 @@ import Post from './Post/Post';
 
 const MyPosts = () => {
     return (
-        <div>
-             My Posts
+        <div className={s.postsBlock}>
+            <h2>My Posts</h2>
             <div>
-               <textarea></textarea>
-               <button>Add Post</button>
-               <button>Remove</button>
-            </div>
-           
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add Post</button>
+                    <button>Remove</button>
+                </div>
 
-            <div className='s.posts'>
+            </div>
+
+
+            <div className={s.posts}>
                 {/* <div className={s.item}>
                     <img src="https://www.w3schools.com/howto/img_avatar.png" alt=""/>Post1
                 
                 </div>
                 <div className={s.item}>Post2</div> */}
-                <Post message='post1'/>
-                <Post message='post2'/>
+                <Post message='post1' />
+                <Post message='post2' />
             </div>
-        
+
         </div>
     );
 
@@ -31,4 +36,4 @@ const MyPosts = () => {
 
 }
 
-export default  MyPosts;
+export default MyPosts;
