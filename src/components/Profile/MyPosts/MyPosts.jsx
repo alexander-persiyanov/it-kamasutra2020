@@ -3,7 +3,17 @@ import s from './MyPosts.module.css';
 
 import Post from './Post/Post';
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
+
+    let postsData = [
+        { id: 1, message: "My post1", },
+        { id: 2, message: "Post 2", },
+        { id: 3, message: "Post 3", },
+    ];
+
+    let postsMap = postsData.map((postItem) => { return <Post message={postItem.message} id={postItem.id} /> });
+
     return (
         <div className={s.postsBlock}>
             <h2>My Posts</h2>
@@ -20,13 +30,8 @@ const MyPosts = () => {
 
 
             <div className={s.posts}>
-                {/* <div className={s.item}>
-                    <img src="https://www.w3schools.com/howto/img_avatar.png" alt=""/>Post1
                 
-                </div>
-                <div className={s.item}>Post2</div> */}
-                <Post message='post1' />
-                <Post message='post2' />
+                {postsMap}
             </div>
 
         </div>
