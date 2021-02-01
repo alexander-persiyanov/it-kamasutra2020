@@ -5,33 +5,19 @@ import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 
-// import logo from './logo.svg';
+
 import "./App.css";
 
-const App = () => {
+const App = (props) => {
+console.dir(props.state);
   return (
     <div className="app-wrapper">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-
       <BrowserRouter>
         <Header></Header>
         <Navbar></Navbar>
         <div className="app-wrapper-content">
-          <Route path="/dialogs" render={()=> <Dialogs/> } />
-          <Route path="/profile" render={()=> <Profile/> } />
+          <Route path="/dialogs" render={()=> <Dialogs state={props.state}/> } />
+          <Route path="/profile" render={()=> <Profile state={props.state}/> } />
         </div>
       </BrowserRouter>
     </div>

@@ -6,13 +6,9 @@ import Post from './Post/Post';
 const MyPosts = (props) => {
 
 
-    let postsData = [
-        { id: 1, message: "My post1", },
-        { id: 2, message: "Post 2", },
-        { id: 3, message: "Post 3", },
-    ];
+  
 
-    let postsMap = postsData.map((postItem) => { return <Post message={postItem.message} id={postItem.id} /> });
+    let postsMap = props.posts.map((postItem) => { return <Post message={postItem.message} id={postItem.id} /> });
 
     return (
         <div className={s.postsBlock}>
