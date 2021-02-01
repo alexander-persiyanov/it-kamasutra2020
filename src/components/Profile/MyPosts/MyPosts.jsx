@@ -5,7 +5,20 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
+    let newPostElement = React.createRef();
 
+    let addPostHandle = ()=>{
+       
+        props.addPost();
+       
+    }
+
+    let changePostHandle =()=>{
+        let  text = newPostElement.current.value;
+        props.changePost(text);
+
+
+    }
   
 
     let postsMap = props.posts.map((postItem) => { return <Post message={postItem.message} id={postItem.id} /> });
@@ -15,10 +28,10 @@ const MyPosts = (props) => {
             <h2>My Posts</h2>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement} value={props.value?props.value:''} onChange={changePostHandle}></textarea>
                 </div>
                 <div>
-                    <button>Add Post</button>
+                    <button onClick={addPostHandle}>Add Post</button>
                     <button>Remove</button>
                 </div>
 
