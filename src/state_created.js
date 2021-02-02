@@ -1,6 +1,7 @@
 const ADD_POST = 'ADD-POST';
-const UPDATE_POST = 'UPDATE-POST'
-
+const UPDATE_POST = 'UPDATE-POST';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE';
 let store = {
   //_private (method or variable)
   _state: {
@@ -23,6 +24,7 @@ let store = {
         { id: 2, message: "Hou are you?" },
         { id: 3, message: "Thanks, im good and you?" },
       ],
+      newMessageBody:"",
     },
   },
   _callSubscriber() {
@@ -51,6 +53,19 @@ let store = {
     } else if (action.type === UPDATE_POST) {
       this._state.profilePage.newPostValue = action.newText;
       this._callSubscriber(this._state);
+    }else if(action.type === UPDATE_NEW_MESSAGE_BODY ){
+      this._state.dialogsPage.newMessageBody = action.body;
+      this._callSubscriber(this._state);
+
+    }
+    else if(action.type === SEND_MESSAGE ){
+      let body = this._state.dialogsPage.newMessageBody;
+      let newMessage = { id: 4, message: body };
+      this._state.dialogsPage.messages.push(newMessage);
+      this._state.dialogsPage.newMessageBody="";
+
+      this._callSubscriber(this._state);
+
     }
   },
 };
@@ -61,6 +76,13 @@ export const addPostAC = ()=>{
 
 export const updatePostAC = (newText)=>{
   return {type:UPDATE_POST,newText:newText,};
+};
+
+export const sendMessageAC = ()=>{
+  return {type:SEND_MESSAGE};
+};
+export const updateNewMessageBodyAC = (body)=>{
+  return {type:UPDATE_NEW_MESSAGE_BODY,body:body};
 };
 
 export default store;
