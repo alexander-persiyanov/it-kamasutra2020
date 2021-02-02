@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_POST = 'UPDATE-POST'
+
 let store = {
   //_private (method or variable)
   _state: {
@@ -35,7 +38,7 @@ let store = {
   },
 
   dispatch(action) {
-    if (action.type === "ADD-POST") {
+    if (action.type === ADD_POST) {
       let newPost = {
         id: 4,
         message: this._state.profilePage.newPostValue,
@@ -45,11 +48,19 @@ let store = {
       this._state.profilePage.newPostValue = "";
 
       this._callSubscriber(this._state);
-    } else if (action.type === "UPDATE-POST") {
+    } else if (action.type === UPDATE_POST) {
       this._state.profilePage.newPostValue = action.newText;
       this._callSubscriber(this._state);
     }
   },
+};
+
+export const addPostAC = ()=>{
+  return {type:ADD_POST};
+};
+
+export const updatePostAC = (newText)=>{
+  return {type:UPDATE_POST,newText:newText,};
 };
 
 export default store;

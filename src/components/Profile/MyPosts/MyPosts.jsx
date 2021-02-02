@@ -2,6 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.css';
 
 import Post from './Post/Post';
+import {addPostAC,updatePostAC} from '../../../state_created';
+
 
 const MyPosts = (props) => {
 
@@ -9,14 +11,14 @@ const MyPosts = (props) => {
 
     let addPostHandle = ()=>{
        
-        props.dispatch({type:'ADD-POST'});
+        props.dispatch(addPostAC());
        
     }
 
-    let changePostHandle =()=>{
+    let updatePostHandle =()=>{
        
         let  text = newPostElement.current.value;
-        props.dispatch({type:'UPDATE-POST',newText:text});
+        props.dispatch(updatePostAC(text));
 
 
     }
@@ -29,7 +31,7 @@ const MyPosts = (props) => {
             <h2>My Posts</h2>
             <div>
                 <div>
-                    <textarea ref={newPostElement} value={props.value?props.value:''} onChange={changePostHandle}></textarea>
+                    <textarea ref={newPostElement} value={props.value?props.value:''} onChange={updatePostHandle}></textarea>
                 </div>
                 <div>
                     <button onClick={addPostHandle}>Add Post</button>
