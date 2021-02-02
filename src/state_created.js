@@ -1,8 +1,10 @@
-import {rerenderEntireTree} from './rerender';
+let rerenderEntireTree = () => {
+  console.log("state changed");
+};
 
 let state = {
   profilePage: {
-    newPostValue:'new post',
+    newPostValue: "new post",
     posts: [
       { id: 1, message: "My post1" },
       { id: 2, message: "Post 2" },
@@ -23,28 +25,26 @@ let state = {
   },
 };
 
-export let addPost = ()=>{
-
+export const addPost = () => {
   let newPost = {
-    id:4,
-    message:state.profilePage.newPostValue,
+    id: 4,
+    message: state.profilePage.newPostValue,
   };
 
   state.profilePage.posts.push(newPost);
-  state.profilePage.newPostValue = '' ;
- 
-  rerenderEntireTree();
+  state.profilePage.newPostValue = "";
 
+  rerenderEntireTree();
 };
 
-export let changePost = (postChanged)=>{
-
-  
-
-  state.profilePage.newPostValue = postChanged ;
- 
+export const changePost = (postChanged) => {
+  state.profilePage.newPostValue = postChanged;
   rerenderEntireTree();
+};
 
+export const subscriber = (observer) => {
+  rerenderEntireTree = observer;
+  
 };
 
 export default state;
