@@ -4,20 +4,20 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import state from "./state_created";
-import { addPost,changePost,subscriber } from "./state_created";
+import store from "./state_created";
 
-let rerenderEntireTree = () => {
+
+let rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
-      <App state={state} addPost={addPost} changePost={changePost} />
+      <App state={store.getState()} addPost={store.addPost.bind(store)} changePost={store.changePost.bind(store)} />
     </React.StrictMode>,
     document.getElementById("root")
   );
 };
-rerenderEntireTree();
+rerenderEntireTree(store.getState());
 
-subscriber(rerenderEntireTree);
+store.subscriber(rerenderEntireTree);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
