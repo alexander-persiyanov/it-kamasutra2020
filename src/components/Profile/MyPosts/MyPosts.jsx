@@ -9,13 +9,14 @@ const MyPosts = (props) => {
 
     let addPostHandle = ()=>{
        
-        props.addPost();
+        props.dispatch({type:'ADD-POST'});
        
     }
 
     let changePostHandle =()=>{
+       
         let  text = newPostElement.current.value;
-        props.changePost(text);
+        props.dispatch({type:'UPDATE-POST',newText:text});
 
 
     }

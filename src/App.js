@@ -17,7 +17,7 @@ console.dir(props.state);
         <Navbar></Navbar>
         <div className="app-wrapper-content">
           <Route path="/dialogs" render={()=> <Dialogs state={props.state}/> } />
-          <Route path="/profile" render={()=> <Profile state={props.state} addPost={props.addPost} changePost={props.changePost}/> } />
+          <Route path="/profile" render={()=> <Profile state={props.state} dispatch={props.dispatch}/> } />
         </div>
       </BrowserRouter>
     </div>

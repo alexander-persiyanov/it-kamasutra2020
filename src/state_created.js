@@ -1,5 +1,5 @@
 let store = {
- 
+  //_private (method or variable)
   _state: {
     profilePage: {
       newPostValue: "new post",
@@ -22,30 +22,33 @@ let store = {
       ],
     },
   },
-  getState(){
-    return this._state;
-  },
   _callSubscriber() {
     console.log("state changed");
   },
 
-  addPost() {
-    let newPost = {
-      id: 4,
-      message: this._state.profilePage.newPostValue,
-    };
-
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostValue = "";
-
-    this._callSubscriber();
+  getState() {
+    return this._state;
   },
-  changePost(newText) {
-    this._state.profilePage.newPostValue = newText;
-    this._callSubscriber();
-  },
+  
   subscriber(observer) {
     this._callSubscriber = observer;
+  },
+
+  dispatch(action) {
+    if (action.type === "ADD-POST") {
+      let newPost = {
+        id: 4,
+        message: this._state.profilePage.newPostValue,
+      };
+
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPostValue = "";
+
+      this._callSubscriber(this._state);
+    } else if (action.type === "UPDATE-POST") {
+      this._state.profilePage.newPostValue = action.newText;
+      this._callSubscriber(this._state);
+    }
   },
 };
 
