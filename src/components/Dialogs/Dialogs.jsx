@@ -5,7 +5,7 @@ import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 
-import {sendMessageAC,updateNewMessageBodyAC} from '../../state_created';
+import {sendMessageAC,updateNewMessageBodyAC} from '../../redux-custome/dialogs-reducer';
 
 const Dialogs = (props) => {
     

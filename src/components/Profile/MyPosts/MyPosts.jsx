@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css';
 
 import Post from './Post/Post';
-import {addPostAC,updatePostAC} from '../../../state_created';
+import {addPostAC,updatePostAC} from '../../../redux-custome/profile-reducer';
 
 
 const MyPosts = (props) => {
