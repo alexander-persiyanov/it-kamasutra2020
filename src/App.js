@@ -9,6 +9,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import "./App.css";
 
 const App = (props) => {
+
 console.dir(props.state);
   return (
     <div className="app-wrapper">
