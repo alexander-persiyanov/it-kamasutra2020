@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import store from "./state_created";
+import store from "./redux-custome/store_created";
 
 
 let rerenderEntireTree = (state) => {
