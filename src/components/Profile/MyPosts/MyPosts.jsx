@@ -2,23 +2,23 @@ import React from 'react';
 import s from './MyPosts.module.css';
 
 import Post from './Post/Post';
-import {addPostAC,updatePostAC} from '../../../redux/profile-reducer';
+
 
 
 const MyPosts = (props) => {
-
+   
     let newPostElement = React.createRef();
 
     let addPostHandle = ()=>{
        
-        props.dispatch(addPostAC());
+      props.addPost();
        
     }
 
     let updatePostHandle =()=>{
        
         let  text = newPostElement.current.value;
-        props.dispatch(updatePostAC(text));
+       props.updateNewPostText(text);
 
 
     }
