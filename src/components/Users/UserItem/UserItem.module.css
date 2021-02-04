@@ -1,0 +1,14 @@
+.userItem{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 15px;
+    align-items: center;
+}
+.userItem >div{
+    padding: 10px;
+   
+}
+.avatar{
+    width: 50px;
+}
