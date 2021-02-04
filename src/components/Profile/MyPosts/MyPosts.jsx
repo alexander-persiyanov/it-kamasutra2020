@@ -24,14 +24,14 @@ const MyPosts = (props) => {
     }
   
 
-    let postsMap = props.posts.map((postItem) => { return <Post message={postItem.message} id={postItem.id} /> });
+    let postsMap = props.posts.map((postItem) => { return <Post message={postItem.message} id={postItem.id} key={postItem.id}/> });
 
     return (
         <div className={s.postsBlock}>
             <h2>My Posts</h2>
             <div>
                 <div>
-                    <textarea ref={newPostElement} value={props.value?props.value:''} onChange={updatePostHandle}></textarea>
+                    <textarea ref={newPostElement} value={props.newTextPost?props.newTextPost:''} onChange={updatePostHandle}></textarea>
                 </div>
                 <div>
                     <button onClick={addPostHandle}>Add Post</button>

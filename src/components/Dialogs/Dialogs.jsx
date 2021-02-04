@@ -5,9 +5,9 @@ import Message from './Message/Message';
 
 const Dialogs = (props) => {
 
-    console.dir(props);
-    let dialogElements = props.dialogsPage.dialogs.map((dialogItem) => { return <DialogItem name={dialogItem.name} id={dialogItem.id} />  });
-    let messageElements = props.dialogsPage.messages.map((messageItem) => { return <Message message={messageItem.message} id={messageItem.id}/> });
+   
+    let dialogElements = props.dialogs.map((dialogItem) => { return <DialogItem name={dialogItem.name} id={dialogItem.id} key={dialogItem.id} />  });
+    let messageElements = props.messages.map((messageItem) => { return <Message message={messageItem.message} id={messageItem.id} key={messageItem.id}/> });
     
     let changeMessageBodyHandle = (e)=>{
         props.changeMessageBody(e.target.value);
@@ -30,7 +30,7 @@ const Dialogs = (props) => {
                 <div>
                     <textarea 
                         
-                        value={props.dialogsPage.newMessageBody?props.dialogsPage.newMessageBody:""}
+                        value={props.newMessageBody?props.newMessageBody:""}
                         onChange={changeMessageBodyHandle}
                         placeholder="Enter your message" 
                         cols="30" rows="5" 
