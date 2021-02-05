@@ -6,7 +6,7 @@ import {followAC,unfollowAC,setUsersAC} from '../../redux/users-reducer';
 const mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
-        defaultAvatar:state.usersPage.defaultAvatar,
+       
        
     };
 }
