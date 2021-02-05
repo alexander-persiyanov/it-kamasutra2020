@@ -6,31 +6,38 @@ import UserItem from './UserItem/UserItem';
 
 
 
+class Users extends React.Component {
 
-const Users = (props) => {
+    getUsers = ()=>{
 
-    if(props.users.length ===0){
+        if(this.props.users.length ===0){
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response)=>{
-            
-            props.setUsers(response.data.items);
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").
+            then((response)=>{
+                
+                this.props.setUsers(response.data.items);
+    
+            });
+        }
 
-        });
     }
 
-   
-    let usersElements = props.users.map((u)=>{ return <UserItem user={u} follow={props.follow} unfollow={props.unfollow} defaultAvatar={userDefaultAvatar} />;});
-    return (
-        <div className={s.users}>
 
-            <h2>Users List</h2>
-            <div>
-                {usersElements}
+    render(){
+        let usersElements = this.props.users.map((u)=>{ return <UserItem key={u.id} user={u} follow={this.props.follow} unfollow={this.props.unfollow} defaultAvatar={userDefaultAvatar} />;});
+        
+        return (
+            <div className={s.users}>
+    
+                <h2>Users List</h2>
+                <div>
+                    {usersElements}
+                </div>
+                <button onClick={this.getUsers}>Set Users</button>
+    
             </div>
-
-        </div>
-    );     
-
+        );      
+    }
 
 }
 
