@@ -18,7 +18,9 @@ const UserItem = (props) => {
 
     return (
         <div className={s.userItem}>
+            <div>
             <img className={s.avatar} src={props.user.photos.small?props.user.photos.small:props.defaultAvatar} alt=""/>
+            </div>
             <div>{props.user.id} </div>
             <div>{props.user.name} </div>
             <div>{props.user.status} </div>
