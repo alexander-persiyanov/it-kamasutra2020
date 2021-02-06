@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import {followAC,unfollowAC,setUsersAC,setCurrentPageAC,setTotalUsersCountAC,toggleIsFetchingAC} from '../../redux/users-reducer';
+import {follow,unfollow,setUsers,setCurrentPage,setTotalUsersCount,toggleIsFetching} from '../../redux/users-reducer';
 
 import * as  axios from 'axios';
 import Users from './Users';
@@ -12,7 +12,7 @@ import Spinner from '../Commons/Spinner/Spinner';
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
-        this.props.togglePreloader(true);
+        this.props.toggleIsFetching(true);
         this.getUsers();
 
     }
@@ -24,19 +24,19 @@ class UsersAPIComponent extends React.Component {
                 
                 this.props.setUsers(response.data.items);
                 this.props.setTotalUsersCount(response.data.totalCount);
-                this.props.togglePreloader(false);
+                this.props.toggleIsFetching(false);
             });
     }
 
 
     onPageChanged = (currentPageNumber)=>{
-        this.props.togglePreloader(true);
+        this.props.toggleIsFetching(true);
         this.props.setCurrentPage(currentPageNumber);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPageNumber}&count=${this.props.pageSize}`).
             then((response) => {
                
                 this.props.setUsers(response.data.items);
-                this.props.togglePreloader(false);
+                this.props.toggleIsFetching(false);
             });
 
     }
@@ -77,32 +77,43 @@ const mapStateToProps = (state) => {
        
     };
 }
+//--si puo accorciare pasando non fuction(dispatch) ma un object
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         follow: (userId) => {
+//             dispatch(follow(userId));
+//         },
+//         unfollow: (userId) => {
+//             dispatch(unfollow(userId));
+//         },
+//         setUsers: (users)=>{
+//             dispatch(setUsers(users));
+//         },
+//         setCurrentPage:(currentPage)=>{
+//             dispatch(setCurrentPage(currentPage));
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users)=>{
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage:(currentPage)=>{
-            dispatch(setCurrentPageAC(currentPage));
+//         },
+//         setTotalUsersCount:(totalCount) => {
+//             dispatch(setTotalUsersCount(totalCount));
+//         },
+//         toggleIsFetching:(isFetching) =>{
+//             dispatch(toggleIsFetching(isFetching));
+//         }
+//     };
+// }
 
-        },
-        setTotalUsersCount:(totalCount) => {
-            dispatch(setTotalUsersCountAC(totalCount));
-        },
-        togglePreloader:(isFetching) =>{
-            dispatch(toggleIsFetchingAC(isFetching));
-        }
-    };
+
+const UsersContainer = connect(mapStateToProps, 
+{
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching,
+
+
 }
-
-
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+)(UsersAPIComponent);
 
 export default UsersContainer;
