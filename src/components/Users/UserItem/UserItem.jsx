@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import s from './UserItem.module.css';
 
 
@@ -19,7 +20,10 @@ const UserItem = (props) => {
     return (
         <div className={s.userItem}>
             <div>
-            <img className={s.avatar} src={props.user.photos.small?props.user.photos.small:props.defaultAvatar} alt=""/>
+                <NavLink to={'/profile/'+props.user.id}>
+                    <img className={s.avatar} src={props.user.photos.small?props.user.photos.small:props.defaultAvatar} alt=""/>
+                </NavLink>
+           
             </div>
             <div>{props.user.id} </div>
             <div>{props.user.name} </div>
