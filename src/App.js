@@ -17,7 +17,8 @@ const App = (props) => {
         <Navbar></Navbar>
         <div className="app-wrapper-content">
           <Route path="/dialogs" render={()=> <DialogsContainer/> } />
-          <Route path="/profile" render={()=> <ProfileContainer/> } />
+          {/* :userId? userId there is parameter and ? there is optional */}
+          <Route path="/profile/:userId?" render={()=> <ProfileContainer/> } />
           <Route path="/users" render={()=> <UsersContainer/> } />
         </div>
       
