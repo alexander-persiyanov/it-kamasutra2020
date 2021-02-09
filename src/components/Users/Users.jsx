@@ -7,7 +7,7 @@ import UserItem from './UserItem/UserItem';
 
 let Users = (props)=>{
 
-    let usersElements = props.users.map((u) => { return <UserItem key={u.id} user={u} follow={props.follow} unfollow={props.unfollow} defaultAvatar={userDefaultAvatar} />; });
+    let usersElements = props.users.map((u) => { return <UserItem key={u.id} user={u} onFollow={props.onFollow} onUnfollow={props.onUnfollow} defaultAvatar={userDefaultAvatar} />; });
     
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];

@@ -8,7 +8,7 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 
 let initialState = {
   users: [],
-  pageSize:5,
+  pageSize:10,
   totalUsersCount:0,
   currentPage:1,
   isFetching:false,
@@ -16,7 +16,9 @@ let initialState = {
 const usersReducer = (state = initialState, action) => {
 
   switch (action.type) {
+   
     case FOLLOW:
+      
      return{
        ...state,
         users:state.users.map(
@@ -30,6 +32,7 @@ const usersReducer = (state = initialState, action) => {
       };
 
     case UNFOLLOW:{
+      
       return{
         ...state,
          users:state.users.map(
