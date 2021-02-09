@@ -7,28 +7,34 @@ import * as  axios from 'axios';
 import Users from './Users';
 
 import Spinner from '../Commons/Spinner/Spinner';
-
+import {usersAPI} from '../../api/api';
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        this.getUsers();
+        // this.getUsers();
+        usersAPI.getUsers(this.props.currentPage,this.props.pageSize).then((data) => {
+            this.props.toggleIsFetching(false);
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
+
+        });
 
     }
 
 
 
-    getUsers = () => {
+    // getUsers = () => {
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{ withCredentials:true}).
-            then((response) => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
+    //     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{ withCredentials:true}).
+    //         then((response) => {
+    //             this.props.toggleIsFetching(false);
+    //             this.props.setUsers(response.data.items);
+    //             this.props.setTotalUsersCount(response.data.totalCount);
 
-            });
-    }
+    //         });
+    // }
 
     onFollow = (userId) => {
         // this.props.toggleIsFetching(true);
@@ -62,7 +68,7 @@ class UsersAPIComponent extends React.Component {
     onUnfollow = (userId) => {
         // this.props.toggleIsFetching(true);
        
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, 
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/`+userId, 
             {
                 withCredentials:true,
                 headers:{
@@ -71,8 +77,8 @@ class UsersAPIComponent extends React.Component {
             }
         ).
             then((response) => {
-                
-                if (response.resultCode == 0) {
+               
+                if (response.data.resultCode == 0) {
                    
                    this.props.unfollow(userId);
                      // this.props.toggleIsFetching(false);
@@ -94,12 +100,21 @@ class UsersAPIComponent extends React.Component {
     onPageChanged = (currentPageNumber) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(currentPageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPageNumber}&count=${this.props.pageSize}`,{ withCredentials:true}).
-            then((response) => {
 
-                this.props.setUsers(response.data.items);
-                this.props.toggleIsFetching(false);
-            });
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPageNumber}&count=${this.props.pageSize}`,{ withCredentials:true}).
+        //     then((response) => {
+
+        //         this.props.setUsers(response.data.items);
+        //         this.props.toggleIsFetching(false);
+        //     });
+
+        usersAPI.getUsers(currentPageNumber,this.props.pageSize).then((data) => {
+           
+            this.props.setUsers(data.items);
+            this.props.toggleIsFetching(false);
+           
+
+        });
 
     }
 

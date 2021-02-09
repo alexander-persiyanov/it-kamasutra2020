@@ -85,7 +85,7 @@ const UserItem = (props) => {
                     }}>Follow</button>
                 } */}
                 <button onClick={()=>{FollowingHandle(props.user.id)}}>{props.user.followed?'unfollow':'follow'}</button>
-               
+               <div>{props.user.followed?'unfollow':'follow'}</div>
             </div>
             
          
