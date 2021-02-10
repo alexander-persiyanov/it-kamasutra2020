@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching } from '../../redux/users-reducer';
+import { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching,toggleFollowingInProgress } from '../../redux/users-reducer';
 
 import * as  axios from 'axios';
 import Users from './Users';
@@ -23,22 +23,9 @@ class UsersAPIComponent extends React.Component {
 
     }
 
-
-
-    // getUsers = () => {
-
-    //     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{ withCredentials:true}).
-    //         then((response) => {
-    //             this.props.toggleIsFetching(false);
-    //             this.props.setUsers(response.data.items);
-    //             this.props.setTotalUsersCount(response.data.totalCount);
-
-    //         });
-    // }
-
     onFollow = (userId) => {
-        // this.props.toggleIsFetching(true);
-  
+       
+        this.props.toggleFollowingInProgress(true,userId);
         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/`+userId, {}, 
             {
                 withCredentials:true,
@@ -51,8 +38,9 @@ class UsersAPIComponent extends React.Component {
             if (response.data.resultCode == 0) {
             
                 this.props.follow(userId);
-            // this.props.toggleIsFetching(false);
-                
+                this.props.toggleFollowingInProgress(false,userId);
+           
+                 
 
             }
            
@@ -66,8 +54,8 @@ class UsersAPIComponent extends React.Component {
     }
 
     onUnfollow = (userId) => {
-        // this.props.toggleIsFetching(true);
-       
+      
+       this.props.toggleFollowingInProgress(true,userId);
         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/`+userId, 
             {
                 withCredentials:true,
@@ -81,14 +69,10 @@ class UsersAPIComponent extends React.Component {
                 if (response.data.resultCode == 0) {
                    
                    this.props.unfollow(userId);
-                     // this.props.toggleIsFetching(false);
+                   this.props.toggleFollowingInProgress(false,userId);
+                   
                     
-
                 }
-               
-               
-               
-                
                
             });
             
@@ -100,13 +84,6 @@ class UsersAPIComponent extends React.Component {
     onPageChanged = (currentPageNumber) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(currentPageNumber);
-
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPageNumber}&count=${this.props.pageSize}`,{ withCredentials:true}).
-        //     then((response) => {
-
-        //         this.props.setUsers(response.data.items);
-        //         this.props.toggleIsFetching(false);
-        //     });
 
         usersAPI.getUsers(currentPageNumber,this.props.pageSize).then((data) => {
            
@@ -127,11 +104,12 @@ class UsersAPIComponent extends React.Component {
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 onPageChanged={this.onPageChanged}
-                // follow={this.props.follow}
                 currentPage={this.props.currentPage}
-                // unfollow={this.props.unfollow}
                 onFollow={this.onFollow}
                 onUnfollow={this.onUnfollow}
+                followingInProgress={this.props.followingInProgress}
+               
+
 
             ></Users>
             {this.props.isFetching ? <Spinner></Spinner> : ''}
@@ -152,6 +130,7 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        followingInProgress:state.usersPage.followingInProgress,
         
 
 
@@ -192,6 +171,7 @@ const UsersContainer = connect(mapStateToProps,
         setCurrentPage,
         setTotalUsersCount,
         toggleIsFetching,
+        toggleFollowingInProgress,
 
 
     }
