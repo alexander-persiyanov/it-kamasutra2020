@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 //****************--USing Users API--> https://social-network.samuraijs.com/  --***********/
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -78,11 +80,11 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 //****-ACTIONS-****
-export const follow = (userId) => {
+export const followSuccess = (userId) => {
   return { type: FOLLOW, userId:userId };
 };
 
-export const unfollow = (userId) => {
+export const unfollowSuccess = (userId) => {
   return { type: UNFOLLOW,userId:userId };
 };
 
@@ -105,6 +107,48 @@ export const toggleIsFetching = (isFetching)=>{
 
 export const toggleFollowingInProgress = (isFetching,userId)=>{
   return {type:FOLLOWING_IN_PROGRESS,isFetching,userId};
+}
+
+//****-THUNK--CREATORS-****
+export const getUsers = (currentPage,pageSize)=>{
+  //****-THUNK-****
+  return (dispatch)=>{
+    dispatch(toggleIsFetching(true));
+
+    usersAPI.getUsers(currentPage,pageSize).then((data) => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount));
+       
+    });
+  }; 
+}
+
+export const follow = (userId)=>{
+  return (dispatch)=>{
+    usersAPI.follow(userId).then((data) => {
+            
+      if (data.resultCode == 0) {
+        dispatch(followSuccess(userId));
+        dispatch(toggleFollowingInProgress(false,userId));
+      }
+            
+    });
+  }; 
+}
+
+export const unfollow = (userId)=>{
+  return (dispatch)=>{
+    usersAPI.unfollow(userId).then((data) => {
+            
+      if (data.resultCode == 0) {
+        
+        dispatch(unfollowSuccess(userId));
+        dispatch(toggleFollowingInProgress(false,userId));
+      }
+            
+    });
+  }; 
 }
 
 export default usersReducer;
