@@ -1,5 +1,6 @@
 import React from 'react';
 import Spinner from '../../Commons/Spinner/Spinner';
+import ProfileStatus from '../ProfileStatus/ProfileStatus';
 import s from './ProfileInfo.module.css';
 
 
@@ -12,9 +13,13 @@ const ProfileInfo = (props) => {
 
     return (
         <div className={s.profileInfo}>
-            <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt="" />
+            {/* <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt="" /> */}
 
+            <div>
+                <ProfileStatus></ProfileStatus>
+            </div>
             <div className={s.profileInfoContainer}>
+               
                 <div>
                     <img src={props.profile.photos.large} alt="" />
                 </div>
@@ -30,6 +35,7 @@ const ProfileInfo = (props) => {
                 <div>
                     {props.profile.lookingForAJobDescription}
                 </div>
+
             </div>
 
 
