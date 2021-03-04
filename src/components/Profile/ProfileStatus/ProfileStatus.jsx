@@ -10,10 +10,7 @@ class ProfileStatus extends React.Component {
         status:this.props.status
         
     }
-    // componentDidMount(){
-    //     this.setState({status:this.props.status});
-    // }
-
+   
     componentDidUpdate=(prevProps,prevStatus)=>{
 
         if(prevProps.status !== this.props.status){

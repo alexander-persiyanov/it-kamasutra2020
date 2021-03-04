@@ -6,7 +6,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginContainer from "./components/Login/LoginContainer";
+import LoginContainerFormik from "./components/Login/LoginContainerFormik";
 
 const App = (props) => {
 
@@ -20,7 +20,7 @@ const App = (props) => {
           {/* :userId? userId there is parameter and ? there is optional */}
           <Route path="/profile/:userId?" render={()=> <ProfileContainer/> } />
           <Route path="/users" render={()=> <UsersContainer/> } />
-          <Route path="/login" render={()=> <LoginContainer></LoginContainer> } />
+          <Route path="/login" render={()=> <LoginContainerFormik></LoginContainerFormik> } />
         </div>
       
     </div>

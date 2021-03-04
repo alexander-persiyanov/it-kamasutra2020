@@ -16,6 +16,8 @@ const Header = (props) => {
             <div>
                 <div>{props.auth.userId}</div>
                 <div>{props.auth.login}</div>
+                <button onClick={props.logout}>Logout</button>
+
             </div>
             
         </>;
