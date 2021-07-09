@@ -53,26 +53,21 @@ const LoginForm = (props) => {
         }
 
         if (!values.password) {
-            errors.password = 'Required';
+            errors.password = 'Required Password';
+        }else if(values.password.length <= 6){
+            errors.password = 'password length should bee more than 6 charaters';
         }
         // if (!values.rememberMe) {
         //     errors.rememberMe = 'Required';
         // }
 
-        // if(values.confirmPassword !== values.password){
-        //     errors.confirmPassword = 'Password dont corrisponded';
-        // }
         return errors;
     };
 
-    const submitForm = (values, { setSubmitting }) => {
+    const submitForm = (values, { setSubmitting ,setErrors,setStatus}) => {
+     
+        props.login(values.email,values.password,values.rememberMe,setSubmitting,setErrors,setStatus);
        
-        setTimeout(() => {
-            props.login(values.email,values.password,values.rememberMe);
-            // alert(JSON.stringify(values, null, 2));
-            // console.log(values);
-            setSubmitting(false);
-        }, 400);
     };
 
     return (
@@ -81,27 +76,38 @@ const LoginForm = (props) => {
                 initialValues={{ email: '', password: '',confirmPassword:'' }}
                 validate={validateForm}
                 onSubmit={submitForm}
+                initialStatus={{msg:"status initial general error",}}
             >
-                {({ isSubmitting }) => (
+                {({ isSubmitting ,errors,status}) => (
                     <Form>
                         <div>
-                            <label htmlFor="email">Email</label>
+                            <div style={{ color: 'red' }}>
+                                {status ? status.msg :'' }
+                            </div>
+                           
+                            <label htmlFor="email">Email
                             <Field type="email" name="email" disabled={isSubmitting} placeholder="email" />
-                            <ErrorMessage name="email" component="div" />
+                           
+                            <ErrorMessage name="email">
+                                { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                            </ErrorMessage>
+                            </label>
                         </div>
                         <div>
                             <label htmlFor="password">Password</label>
                             <Field type="password" name="password" disabled={isSubmitting} placeholder="password" />
-                            <ErrorMessage name="password" component="div" />
+                          
+                            <ErrorMessage name="password">
+                                { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                           
+                            </ErrorMessage>
+                          
                         </div>
-                        {/* <div>
-                            <label htmlFor="confirmPassword">confirme Password</label>
-                            <Field type="password" name="confirmPassword" disabled={isSubmitting} placeholder="confirme Password" />
-                            <ErrorMessage name="confirmPassword" component="div" />
-                        </div> */}
+                       
                         <div>
-                            <label htmlFor="rememberMe">Remember me</label>
+                            <label htmlFor="rememberMe">Remember me
                             <Field type="checkbox" name="rememberMe" />
+                            </label>
                             <ErrorMessage name="rememberMe" component="div" />
                         </div>
                         <div>
@@ -110,6 +116,10 @@ const LoginForm = (props) => {
                             </button>
 
                         </div>
+                        <div>
+                       
+                        </div>
+                      
                        
                        
                     </Form>

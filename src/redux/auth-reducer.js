@@ -10,6 +10,7 @@ let initialState = {
   email:null,
   login:null,
   isAuth:false,
+  errors:null,
 };
 const authReducer = (state = initialState, action) => {
 
@@ -46,15 +47,32 @@ export const getAuthUserData = () => {
 };
 
 
-export const login = (email,password,rememberMe) => {
+export const login = (email,password,rememberMe,setSubmitting,setErrors,setStatus) => {
   return (dispatch)=>{
     authAPI.login(email,password,rememberMe).then((data)=>{
-   
+      
       if(data.resultCode === 0){
        
         dispatch(getAuthUserData());
-
+        setSubmitting(false);
+       
       }
+      // else if(data.resultCode == 1){
+        
+      //   console.dir(data);
+      //   setErrors({ password: data.messages[0], email: data.messages[0], });
+      //   // setStatus({msg:data.messages[0]});
+      //   setSubmitting(false);
+      //    
+
+      // }
+      else if(data.resultCode !== 0){
+        console.dir(data);
+        setStatus({msg:data.messages[0]});
+        setSubmitting(false);
+      }
+      
+      
     });
 
   };
