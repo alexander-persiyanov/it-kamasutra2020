@@ -22,7 +22,7 @@ const UserItem = (props) => {
     };
 
     return (
-        <div className={s.userItem}>
+        <div className={s.userItem} >
             <div>
                 <NavLink to={'/profile/'+props.user.id}>
                     <img className={s.avatar} src={props.user.photos.small?props.user.photos.small:props.defaultAvatar} alt=""/>

@@ -37,9 +37,10 @@ let Users = (props)=>{
                 {usersElements}
             </div>
             <div className={s.paginationContainer}>
-                {pages.map((p) => {
+                {pages.map((p,index) => {
                     return (
                         <div
+                            key={index}
                             className={props.currentPage === p ? s.active : ''}
                             onClick={() => {  props.onPageChanged(p) }}
                         >{p}</div>
