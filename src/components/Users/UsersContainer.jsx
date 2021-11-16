@@ -5,7 +5,7 @@ import {setCurrentPage,requestUsers,follow,unfollow } from '../../redux/users-re
 import Users from './Users';
 
 import Spinner from '../Commons/Spinner/Spinner';
-import {getUsers,getPageSize,getTotalUsersCount,getCurrentPage,getIsFetching,getFollowingInProgress} from '../../redux/users-selectors';
+import {getPageSize,getTotalUsersCount,getCurrentPage,getIsFetching,getFollowingInProgress, getUsersSuper} from '../../redux/users-selectors';
 
 class UsersAPIComponent extends React.Component {
 
@@ -56,7 +56,8 @@ class UsersAPIComponent extends React.Component {
 // }
 const mapStateToProps = (state) => {
     return {
-        users: getUsers(state),
+        //getUsersSuper is super selector (is not simple but use simple selector getUsers )
+        users: getUsersSuper(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
