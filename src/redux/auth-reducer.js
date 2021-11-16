@@ -34,7 +34,7 @@ export const setAuthUserData = (userId,email,login,isAuth) => {
 //****-THUNK_ACTIONS-****
 export const getAuthUserData = () => {
   return (dispatch)=>{
-    authAPI.me().then((data)=>{
+   return authAPI.me().then((data)=>{
       if(data.resultCode === 0){
         //destructurization
         let {id,login,email} = data.data;
