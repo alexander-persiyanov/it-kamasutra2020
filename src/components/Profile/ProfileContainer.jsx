@@ -9,7 +9,7 @@ import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 class ProfileContainer extends React.Component{
    
     componentDidMount(){  
-       console.log("****");
+      
       let userId = this.props.match.params.userId;
       if(!userId  && ! this.props.authorizedUserId){
          this.props.history.push("/login"); 

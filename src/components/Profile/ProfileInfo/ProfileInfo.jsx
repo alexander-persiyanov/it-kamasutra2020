@@ -1,6 +1,7 @@
 import React from 'react';
 import Spinner from '../../Commons/Spinner/Spinner';
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
+import ProfileStatusWithHooks from '../ProfileStatus/ProfileStatusWithHooks';
 import s from './ProfileInfo.module.css';
 
 
@@ -16,7 +17,8 @@ const ProfileInfo = (props) => {
             {/* <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt="" /> */}
 
             <div>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}></ProfileStatus>
+                <ProfileStatusWithHooks  status={props.status} updateStatus={props.updateStatus}/ >
+                {/* <ProfileStatus status={props.status} updateStatus={props.updateStatus}></ProfileStatus> */}
             </div>
             <div className={s.profileInfoContainer}>
                
