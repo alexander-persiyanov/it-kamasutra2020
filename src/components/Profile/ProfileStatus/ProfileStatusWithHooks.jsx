@@ -4,14 +4,16 @@ import s from './ProfileStatus.module.css';
 const ProfileStatusWithHooks = (props)=>{
 
     const [editMode,setEditMode] = useState(false);
-    const [status,setStatus] = useState(props.status);
+    const [status,setStatus] = useState(props.status ? props.status :"insert status");
 
 
    useEffect(()=>{
-   
-     
+  
     setStatus(props.status);
-   },[])
+   },[props.status])
+
+
+
     
       
    const  activateEditMode = ()=>{
