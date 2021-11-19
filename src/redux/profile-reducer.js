@@ -4,6 +4,7 @@ const ADD_POST = "ADD-POST";
 const UPDATE_POST = "UPDATE-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
+const DELETE_POST ="DELETE_POST";
 
 let initialState = {
   newPostValue: "new post",
@@ -19,8 +20,11 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
-      let newPost = { id: 4, message: state.newPostValue };
+      let newPost = { id: 4, message: action.text };
       return { ...state, posts: [...state.posts, newPost], newPostValue: "" };
+    }
+    case DELETE_POST:{
+      return {...state,posts:state.posts.filter(post=>post.id!=action.postId)}
     }
     case UPDATE_POST: {
       return { ...state, newPostValue: action.newText };
@@ -37,8 +41,12 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 //****-ACTIONS-****
-export const addPostAC = () => {
-  return { type: ADD_POST };
+export const addPostAC = (text) => {
+  return { type: ADD_POST,text:text };
+};
+
+export const deletePost = (postId) => {
+  return { type: DELETE_POST,postId:postId };
 };
 
 export const updatePostAC = (newText) => {

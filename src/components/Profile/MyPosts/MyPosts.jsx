@@ -14,8 +14,8 @@ render(){
     let newPostElement = React.createRef();
 
     let addPostHandle = ()=>{
-       
-      this.props.addPost();
+        let  text = newPostElement.current.value;
+      this.props.addPost(text);
        
     }
 
