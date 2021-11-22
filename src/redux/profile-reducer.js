@@ -66,35 +66,35 @@ export const setStatus = (status) => {
 
 export const getUserProfile = (userId) => {
   
-  return (dispatch) => {
-    usersAPI.getProfileData(userId).then((data) => {
-      dispatch(setUserProfile(data));
-    });
+  return async (dispatch) => {
+    let response = await usersAPI.getProfileData(userId);
+    dispatch(setUserProfile(response));
+    
   };
 };
 
 export const getStatus = (userId) => {
   
-  return (dispatch) => {
+  return async(dispatch) => {
    
-    profileAPI.getStatus(userId).then((status) => {
-      dispatch(setStatus(status));
-    });
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response));
+  
   };
 };
 
 export const updateStatus = (status) => {
   
-  return (dispatch) => {
+  return async(dispatch) => {
    
-    profileAPI.updateStatus(status).then((response) => {
-    
-      if(response.resultCode === 0 ){
-        dispatch(setStatus(status));
+    let response = await profileAPI.updateStatus(status);
+   
+    if(response.resultCode === 0 ){
+      dispatch(setStatus(response));
 
-      }
+    }
      
-    });
+    
   };
 };
 

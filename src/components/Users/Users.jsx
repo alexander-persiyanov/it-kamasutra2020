@@ -3,32 +3,29 @@ import s from './Users.module.css';
 import userDefaultAvatar from '../../assets/images/default-avatar-icon.png'
 
 import UserItem from './UserItem/UserItem';
+import Paginator from '../Commons/Paginator/Paginator';
 
 
-let Users = (props)=>{
+let Users = ({
+    users,followingInProgress,onFollow,onUnfollow,
+    totalUsersCount,pageSize,currentPage,onPageChanged,...props
+    })=>{
 
-    let usersElements = props.users.map((u) => { 
+    let usersElements = users.map((u) => { 
         return (
             <UserItem 
                 key={u.id} 
                 user={u} 
-                followingInProgress={props.followingInProgress} 
+                followingInProgress={followingInProgress} 
                 defaultAvatar={userDefaultAvatar} 
-                onFollow={props.onFollow} 
-                onUnfollow={props.onUnfollow} 
+                onFollow={onFollow} 
+                onUnfollow={onUnfollow} 
                 
-               
-               
             />
         ); 
     });
     
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-
+   
     return (
         <div className={s.users}>
 
@@ -36,19 +33,13 @@ let Users = (props)=>{
             <div>
                 {usersElements}
             </div>
-            <div className={s.paginationContainer}>
-                {pages.map((p,index) => {
-                    return (
-                        <div
-                            key={index}
-                            className={props.currentPage === p ? s.active : ''}
-                            onClick={() => {  props.onPageChanged(p) }}
-                        >{p}</div>
-                    );
-                })}
-
-
-            </div>
+          
+            <Paginator 
+                totalCount = {totalUsersCount}  
+                pageSize ={pageSize} 
+                currentPage={ currentPage} 
+                onPageChanged = {onPageChanged}
+            />
 
         </div>
     );

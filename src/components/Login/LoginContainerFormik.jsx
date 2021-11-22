@@ -39,7 +39,7 @@ let mapStateToProps = (state) => {
 }
 
 
-const LoginForm = (props) => {
+const LoginForm = ({login}) => {
 
     const validateForm = (values) => {
        
@@ -66,7 +66,7 @@ const LoginForm = (props) => {
 
     const submitForm = (values, { setSubmitting ,setErrors,setStatus}) => {
      
-        props.login(values.email,values.password,values.rememberMe,setSubmitting,setErrors,setStatus);
+       login(values.email,values.password,values.rememberMe,setSubmitting,setErrors,setStatus);
        
     };
 

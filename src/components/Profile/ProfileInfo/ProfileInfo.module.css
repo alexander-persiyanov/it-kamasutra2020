@@ -11,3 +11,6 @@
 .profileInfoContainer>div{
     margin-left: 15px;
 }
+.profileInfoContainer .avatar{
+    max-width: 150px;
+}

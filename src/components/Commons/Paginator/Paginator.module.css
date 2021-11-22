@@ -1,0 +1,23 @@
+.paginationContainer {
+    padding: 15px;
+  }
+  
+  .paginationContainer > div {
+    display: inline-block;
+    margin-left: 8px;
+    border: 1px solid black;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 26px;
+    text-align: center;
+    background-color: aliceblue;
+  }
+  .paginationContainer > div:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  .paginationContainer .active{
+    font-weight: bold;
+    color:red;
+  }

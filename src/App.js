@@ -7,7 +7,6 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainerFormik from "./components/Login/LoginContainerFormik";
-import { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {initializeApp} from "./redux/app-reducer";

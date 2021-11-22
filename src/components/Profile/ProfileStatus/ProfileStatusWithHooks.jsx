@@ -5,10 +5,10 @@ const ProfileStatusWithHooks = (props)=>{
 
     const [editMode,setEditMode] = useState(false);
     const [status,setStatus] = useState(props.status ? props.status :"insert status");
-
+    
 
    useEffect(()=>{
-  
+  console.log("status");
     setStatus(props.status);
    },[props.status])
 

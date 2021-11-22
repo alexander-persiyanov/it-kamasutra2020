@@ -1,14 +1,13 @@
 import React from 'react';
 import Spinner from '../../Commons/Spinner/Spinner';
-import ProfileStatus from '../ProfileStatus/ProfileStatus';
 import ProfileStatusWithHooks from '../ProfileStatus/ProfileStatusWithHooks';
 import s from './ProfileInfo.module.css';
+import defaultImgProfile from '../../../assets/images/default-avatar-icon.png' 
 
-
-const ProfileInfo = (props) => {
+const ProfileInfo = ({profile,status,updateStatus,...props}) => {
 
     //first render haven't data  
-    if (!props.profile) {
+    if (!profile) {
         return <Spinner></Spinner>;
     }
 
@@ -17,25 +16,28 @@ const ProfileInfo = (props) => {
             {/* <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt="" /> */}
 
             <div>
-                <ProfileStatusWithHooks  status={props.status} updateStatus={props.updateStatus}/ >
-                {/* <ProfileStatus status={props.status} updateStatus={props.updateStatus}></ProfileStatus> */}
+                <ProfileStatusWithHooks  status={status} updateStatus={updateStatus}/ >
+                {/* <ProfileStatus status={status} updateStatus={updateStatus}></ProfileStatus> */}
             </div>
             <div className={s.profileInfoContainer}>
                
                 <div>
-                    <img src={props.profile.photos.large} alt="" />
+                    {profile.photos.large ? ( <img className={s.avatar} src={profile.photos.large} alt="" />) : 
+                        ( <img className={s.avatar} src={defaultImgProfile} alt="" />)
+                    }
+                   
                 </div>
                 <div>
-                    {props.profile.userId}
+                    {profile.userId}
                 </div>
                 <div>
-                    {props.profile.fullName}
+                    {profile.fullName}
                 </div>
                 <div className={s.description}>
-                    {props.profile.aboutMe}
+                    {profile.aboutMe}
                 </div>
                 <div>
-                    {props.profile.lookingForAJobDescription}
+                    {profile.lookingForAJobDescription}
                 </div>
 
             </div>

@@ -2,7 +2,7 @@
 
 import { authAPI } from "../api/api";
 
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "samurai-network/auth/SET_USER_DATA";
 
 
 let initialState = {
@@ -33,25 +33,26 @@ export const setAuthUserData = (userId,email,login,isAuth) => {
 
 //****-THUNK_ACTIONS-****
 export const getAuthUserData = () => {
-  return (dispatch)=>{
-   return authAPI.me().then((data)=>{
-      if(data.resultCode === 0){
-        //destructurization
-        let {id,login,email} = data.data;
-        dispatch(setAuthUserData(id,email,login,true));
+  return async (dispatch)=>{
+  let response = await authAPI.me();
+  
+  if(response.resultCode === 0){
+    //destructurization
+    let {id,login,email} = response.data;
+    dispatch(setAuthUserData(id,email,login,true));
 
-      }
-    });
+  }
+   
 
   };
 };
 
 
 export const login = (email,password,rememberMe,setSubmitting,setErrors,setStatus) => {
-  return (dispatch)=>{
-    authAPI.login(email,password,rememberMe).then((data)=>{
-      
-      if(data.resultCode === 0){
+  return async (dispatch)=>{
+     let response = await authAPI.login(email,password,rememberMe);
+   
+      if(response.resultCode === 0){
        
         dispatch(getAuthUserData());
         setSubmitting(false);
@@ -66,28 +67,30 @@ export const login = (email,password,rememberMe,setSubmitting,setErrors,setStatu
       //    
 
       // }
-      else if(data.resultCode !== 0){
-        console.dir(data);
-        setStatus({msg:data.messages[0]});
+      else if(response.resultCode !== 0){
+        // console.dir(data);
+       
+        setStatus({msg:response.messages[0]});
         setSubmitting(false);
       }
       
       
-    });
+   
 
   };
 };
 
 export const logout = () => {
-  return (dispatch)=>{
-    authAPI.logout().then((data)=>{
+  return async (dispatch)=>{
+    let response  = await authAPI.logout();
+    
      
-      if(data.resultCode === 0){
-       
-        dispatch(setAuthUserData(null,null,null,false));
+    if(response.resultCode === 0){
+      
+      dispatch(setAuthUserData(null,null,null,false));
 
-      }
-    });
+    }
+   
 
   };
 };
