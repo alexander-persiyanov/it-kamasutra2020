@@ -3,6 +3,7 @@ import Spinner from '../../Commons/Spinner/Spinner';
 import ProfileStatusWithHooks from '../ProfileStatus/ProfileStatusWithHooks';
 import s from './ProfileInfo.module.css';
 import defaultImgProfile from '../../../assets/images/default-avatar-icon.png' 
+import ProfileStatus from '../ProfileStatus/ProfileStatus';
 
 const ProfileInfo = ({profile,status,updateStatus,...props}) => {
 
@@ -16,8 +17,8 @@ const ProfileInfo = ({profile,status,updateStatus,...props}) => {
             {/* <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt="" /> */}
 
             <div>
-                <ProfileStatusWithHooks  status={status} updateStatus={updateStatus}/ >
-                {/* <ProfileStatus status={status} updateStatus={updateStatus}></ProfileStatus> */}
+                {/* <ProfileStatusWithHooks  status={status} updateStatus={updateStatus}/ > */}
+                <ProfileStatus status={status} updateStatus={updateStatus}></ProfileStatus>
             </div>
             <div className={s.profileInfoContainer}>
                
