@@ -3,6 +3,7 @@ import {create} from "react-test-renderer";
 import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
+//**FOR RUN TEST INSERT : npm run test */
 describe("ProfileStatus component", () => {
     test("status from props should be in the state", () => {
       const component = create(<ProfileStatus status="test status"></ProfileStatus>);

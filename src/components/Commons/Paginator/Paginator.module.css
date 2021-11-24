@@ -1,17 +1,33 @@
 .paginationContainer {
-    padding: 15px;
+    /* padding: 15px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
   
+  .paginationWrapper{
+    display: flex;
+    justify-content: space-around;
+  }
+  .btnNav{
+    align-self: center;
+  }
   .paginationContainer > div {
-    display: inline-block;
+    /* display: inline-block;
     margin-left: 8px;
     border: 1px solid black;
     width: 25px;
     height: 25px;
     border-radius: 50%;
     line-height: 26px;
-    text-align: center;
+    text-align: center; */
     background-color: aliceblue;
+    padding: 3px;
+    border: 1px solid grey;
+    text-align: center;
+    margin: 3px;
+    width: 50px;
+    flex-basis: 50px;
   }
   .paginationContainer > div:hover {
     opacity: 0.8;
