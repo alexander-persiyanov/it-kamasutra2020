@@ -2,15 +2,26 @@ import React from "react";
 import {  Route, withRouter } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
+
+
+
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainerFormik from "./components/Login/LoginContainerFormik";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/Commons/Spinner/Spinner";
+
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import { withSuspense } from "./hoc/withSuspense";
+// const OtherComponent = React.lazy(() => import('./OtherComponent'));
+// import DialogsContainer from "./components/Dialogs/DialogsContainer";
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+
+
 
 
 
@@ -31,7 +42,7 @@ class App extends React.Component {
           <HeaderContainer></HeaderContainer>
           <Navbar></Navbar>
           <div className="app-wrapper-content">
-            <Route path="/dialogs" render={()=> <DialogsContainer/> } />
+            <Route path="/dialogs" render={withSuspense(DialogsContainer) } />
             {/* :userId? userId there is parameter and ? there is optional */}
             <Route path="/profile/:userId?" render={()=> <ProfileContainer/> } />
             <Route path="/users" render={()=> <UsersContainer/> } />
