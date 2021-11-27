@@ -28,6 +28,7 @@ const ProfileInfo = ({profile,status,updateStatus,isOwner,savePhoto,...props}) =
             <div>
                 {/* <ProfileStatusWithHooks  status={status} updateStatus={updateStatus}/ > */}
                 <ProfileStatus status={status} updateStatus={updateStatus}></ProfileStatus>
+               
             </div>
             <div className={s.profileInfoContainer}>
                
@@ -39,17 +40,21 @@ const ProfileInfo = ({profile,status,updateStatus,isOwner,savePhoto,...props}) =
                    
                 </div>
                 <div>
-                    {profile.userId}
+                    <b>User Id:</b>{profile.userId}
                 </div>
                 <div>
-                    {profile.fullName}
+                    <b>Full name:</b>{profile.fullName}
                 </div>
                 <div className={s.description}>
-                    {profile.aboutMe}
+                    <b>About me:</b>{profile.aboutMe}
                 </div>
                 <div>
-                    {profile.lookingForAJobDescription}
+                    <b>Looking for job:</b>{profile.lookingForAJob?"yes":"no"}
                 </div>
+               
+                {profile.lookingForAJobDescription?(<div> <b>Looking for job:</b>: profile.lookingForAJobDescription</div>):""}
+                   
+               
 
             </div>
 
