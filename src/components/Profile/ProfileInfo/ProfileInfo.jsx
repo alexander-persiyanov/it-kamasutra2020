@@ -5,13 +5,22 @@ import s from './ProfileInfo.module.css';
 import defaultImgProfile from '../../../assets/images/default-avatar-icon.png' 
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
 
-const ProfileInfo = ({profile,status,updateStatus,...props}) => {
+const ProfileInfo = ({profile,status,updateStatus,isOwner,savePhoto,...props}) => {
 
     //first render haven't data  
     if (!profile) {
         return <Spinner></Spinner>;
     }
+    const onMainPhotoSelected = (e)=>{
+        if(e.target.files.length){
+            let file = e.target.files[0];
+            savePhoto(file);
+          
 
+        }
+       
+    }
+    console.log(profile);
     return (
         <div className={s.profileInfo}>
             {/* <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt="" /> */}
@@ -26,6 +35,7 @@ const ProfileInfo = ({profile,status,updateStatus,...props}) => {
                     {profile.photos.large ? ( <img className={s.avatar} src={profile.photos.large} alt="" />) : 
                         ( <img className={s.avatar} src={defaultImgProfile} alt="" />)
                     }
+                    {isOwner && (<div><input type="file" onChange={(e)=>{onMainPhotoSelected(e)}}/></div>)}
                    
                 </div>
                 <div>
