@@ -96,9 +96,11 @@ export const updateStatus = (status) => {
   return async(dispatch) => {
    
     let response = await profileAPI.updateStatus(status);
-   
+
     if(response.resultCode === 0 ){
-      dispatch(setStatus(response));
+     
+      dispatch(setStatus(status));
+    
 
     }
      
@@ -106,12 +108,13 @@ export const updateStatus = (status) => {
   };
 };
 
+
 export const savePhoto = (file)=>{
   return async (dispatch)=>{
     let data = await profileAPI.savePhoto(file);
    
     if(data.resultCode === 0 ){
-
+      //put return data.photos
       let photos = data.data.photos;
    
       dispatch(savePhotoSuccess(photos));
