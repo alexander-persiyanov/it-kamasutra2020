@@ -21,7 +21,7 @@ class LoginContainer extends React.Component {
 
             <div>
                 <h2>Login</h2>
-                <LoginForm login={this.props.login} logout={this.props.logout}></LoginForm>
+                <LoginForm captchaUrl={this.props.captchaUrl} login={this.props.login} logout={this.props.logout}></LoginForm>
 
 
             </div>
@@ -32,14 +32,15 @@ class LoginContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth:state.auth.isAuth
+        isAuth:state.auth.isAuth,
+        captchaUrl:state.auth.captchaUrl,
 
 
     };
 }
 
 
-const LoginForm = ({login}) => {
+const LoginForm = ({login,captchaUrl}) => {
 
     const validateForm = (values) => {
        
@@ -57,6 +58,13 @@ const LoginForm = ({login}) => {
         }else if(values.password.length <= 6){
             errors.password = 'password length should bee more than 6 charaters';
         }
+        if(captchaUrl){
+            if (!values.captcha) {
+                errors.captcha = 'Required captcha';
+            }
+        }
+       
+       
         // if (!values.rememberMe) {
         //     errors.rememberMe = 'Required';
         // }
@@ -65,18 +73,18 @@ const LoginForm = ({login}) => {
     };
 
     const submitForm = (values, { setSubmitting ,setErrors,setStatus}) => {
-     
-       login(values.email,values.password,values.rememberMe,setSubmitting,setErrors,setStatus);
+    
+       login(values.email,values.password,values.rememberMe,values.captcha,setSubmitting,setErrors,setStatus);
        
     };
 
     return (
         <div>
             <Formik
-                initialValues={{ email: '', password: '',confirmPassword:'' }}
+                initialValues={{ email: '', password: '',confirmPassword:'',captcha:'' }}
                 validate={validateForm}
                 onSubmit={submitForm}
-                initialStatus={{msg:"status initial general error",}}
+                // initialStatus={{msg:"status initial general error",}}
             >
                 {({ isSubmitting ,errors,status}) => (
                     <Form>
@@ -110,6 +118,15 @@ const LoginForm = ({login}) => {
                             </label>
                             <ErrorMessage name="rememberMe" component="div" />
                         </div>
+                            {captchaUrl && (<div><img src={captchaUrl}/> </div>) }
+                            {captchaUrl && (<div><Field type="text" name="captcha" disabled={isSubmitting} placeholder="insert captcha" /></div>) }
+                            {captchaUrl && (<div> 
+                                <ErrorMessage name="captcha">
+                                { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                                </ErrorMessage>
+
+                            </div>) }
+                           
                         <div>
                             <button type="submit" disabled={isSubmitting}>
                                 Submit

@@ -1,8 +1,11 @@
 //****************--USing Users API--> https://social-network.samuraijs.com/  --***********/
 
-import { authAPI } from "../api/api";
+import { authAPI, securityAPI } from "../api/api";
 
 const SET_USER_DATA = "samurai-network/auth/SET_USER_DATA";
+const GET_CAPTCHA_SUCCESS = "samurai-network/auth/GET_CAPTCHA_SUCCESS";
+const GET_CAPTCHA_REMOVE = "samurai-network/auth/GET_CAPTCHA_REMOVE";
+
 
 
 let initialState = {
@@ -11,6 +14,7 @@ let initialState = {
   login:null,
   isAuth:false,
   errors:null,
+  captchaUrl:null,
 };
 const authReducer = (state = initialState, action) => {
 
@@ -19,6 +23,12 @@ const authReducer = (state = initialState, action) => {
      
       return {...state,...action.payload,isAuth:action.payload.isAuth};
 
+    }
+    case GET_CAPTCHA_SUCCESS:{
+      return{...state ,captchaUrl:action.payload.captchaUrl};
+    }
+    case GET_CAPTCHA_REMOVE:{
+      return{...state ,captchaUrl:null};
     }
      
 
@@ -29,6 +39,13 @@ const authReducer = (state = initialState, action) => {
 //****-ACTIONS-****
 export const setAuthUserData = (userId,email,login,isAuth) => {
   return { type: SET_USER_DATA, payload:{ userId,email,login,isAuth } };
+};
+
+export const getCaptchaUrlSuccess = (captchaUrl) => {
+  return { type: GET_CAPTCHA_SUCCESS, payload:{captchaUrl} };
+};
+export const getCaptchaUrlRemove = () => {
+  return { type:GET_CAPTCHA_REMOVE };
 };
 
 //****-THUNK_ACTIONS-****
@@ -48,17 +65,33 @@ export const getAuthUserData = () => {
 };
 
 
-export const login = (email,password,rememberMe,setSubmitting,setErrors,setStatus) => {
+export const login = (email,password,rememberMe,captcha,setSubmitting,setErrors,setStatus) => {
   return async (dispatch)=>{
-     let response = await authAPI.login(email,password,rememberMe);
+     let response = await authAPI.login(email,password,rememberMe,captcha);
    
       if(response.resultCode === 0){
        
         dispatch(getAuthUserData());
         setSubmitting(false);
+        dispatch(getCaptchaUrlRemove());
        
+      }else {
+        if(response.resultCode === 10){
+          dispatch(getCaptchaUrl());
+
+          if(response.fieldsErrors.length>0){
+            setErrors({[response.fieldsErrors[0].field]:response.fieldsErrors[0].error});
+          }
+          
+         
+        }
+        setStatus({msg:response.messages[0]});
+        setSubmitting(false);
+      
+
       }
-      // else if(data.resultCode == 1){
+
+       // else if(data.resultCode == 1){
         
       //   console.dir(data);
       //   setErrors({ password: data.messages[0], email: data.messages[0], });
@@ -67,18 +100,22 @@ export const login = (email,password,rememberMe,setSubmitting,setErrors,setStatu
       //    
 
       // }
-      else if(response.resultCode !== 0){
-        // console.dir(data);
-       
-        setStatus({msg:response.messages[0]});
-        setSubmitting(false);
-      }
-      
-      
-   
+    
+  };
+};
+
+
+
+export const getCaptchaUrl = () => {
+  return async (dispatch)=>{
+    const response = await securityAPI.getCaptchaUrl();
+    const captchaUrl = response.url;
+
+    dispatch(getCaptchaUrlSuccess(captchaUrl));
 
   };
 };
+
 
 export const logout = () => {
   return async (dispatch)=>{
