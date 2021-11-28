@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/it-kamasutra2020/static/css/main.ec2dfb4b.chunk.css",
-    "main.js": "/it-kamasutra2020/static/js/main.60c4b6ac.chunk.js",
-    "main.js.map": "/it-kamasutra2020/static/js/main.60c4b6ac.chunk.js.map",
-    "runtime-main.js": "/it-kamasutra2020/static/js/runtime-main.23c3e115.js",
-    "runtime-main.js.map": "/it-kamasutra2020/static/js/runtime-main.23c3e115.js.map",
-    "static/js/2.ff96705e.chunk.js": "/it-kamasutra2020/static/js/2.ff96705e.chunk.js",
-    "static/js/2.ff96705e.chunk.js.map": "/it-kamasutra2020/static/js/2.ff96705e.chunk.js.map",
+    "main.css": "/it-kamasutra2020/static/css/main.0963fb57.chunk.css",
+    "main.js": "/it-kamasutra2020/static/js/main.39cad078.chunk.js",
+    "main.js.map": "/it-kamasutra2020/static/js/main.39cad078.chunk.js.map",
+    "runtime-main.js": "/it-kamasutra2020/static/js/runtime-main.deef849e.js",
+    "runtime-main.js.map": "/it-kamasutra2020/static/js/runtime-main.deef849e.js.map",
+    "static/js/2.1eb80a44.chunk.js": "/it-kamasutra2020/static/js/2.1eb80a44.chunk.js",
+    "static/js/2.1eb80a44.chunk.js.map": "/it-kamasutra2020/static/js/2.1eb80a44.chunk.js.map",
     "static/css/3.537d3896.chunk.css": "/it-kamasutra2020/static/css/3.537d3896.chunk.css",
-    "static/js/3.8ccaa502.chunk.js": "/it-kamasutra2020/static/js/3.8ccaa502.chunk.js",
-    "static/js/3.8ccaa502.chunk.js.map": "/it-kamasutra2020/static/js/3.8ccaa502.chunk.js.map",
+    "static/js/3.2708948a.chunk.js": "/it-kamasutra2020/static/js/3.2708948a.chunk.js",
+    "static/js/3.2708948a.chunk.js.map": "/it-kamasutra2020/static/js/3.2708948a.chunk.js.map",
     "index.html": "/it-kamasutra2020/index.html",
-    "precache-manifest.bb0d4ad8faa1a594d07b4eefaa98acc5.js": "/it-kamasutra2020/precache-manifest.bb0d4ad8faa1a594d07b4eefaa98acc5.js",
+    "precache-manifest.d994f79687c3d88ba78db6bbfe9e9eea.js": "/it-kamasutra2020/precache-manifest.d994f79687c3d88ba78db6bbfe9e9eea.js",
     "service-worker.js": "/it-kamasutra2020/service-worker.js",
     "static/css/3.537d3896.chunk.css.map": "/it-kamasutra2020/static/css/3.537d3896.chunk.css.map",
-    "static/css/main.ec2dfb4b.chunk.css.map": "/it-kamasutra2020/static/css/main.ec2dfb4b.chunk.css.map",
-    "static/js/2.ff96705e.chunk.js.LICENSE.txt": "/it-kamasutra2020/static/js/2.ff96705e.chunk.js.LICENSE.txt",
+    "static/css/main.0963fb57.chunk.css.map": "/it-kamasutra2020/static/css/main.0963fb57.chunk.css.map",
+    "static/js/2.1eb80a44.chunk.js.LICENSE.txt": "/it-kamasutra2020/static/js/2.1eb80a44.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/it-kamasutra2020/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.23c3e115.js",
-    "static/js/2.ff96705e.chunk.js",
-    "static/css/main.ec2dfb4b.chunk.css",
-    "static/js/main.60c4b6ac.chunk.js"
+    "static/js/runtime-main.deef849e.js",
+    "static/js/2.1eb80a44.chunk.js",
+    "static/css/main.0963fb57.chunk.css",
+    "static/js/main.39cad078.chunk.js"
   ]
 }
