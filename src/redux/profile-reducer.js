@@ -76,6 +76,14 @@ export const getUserProfile = (userId) => {
   
   return async (dispatch) => {
     let response = await usersAPI.getProfileData(userId);
+    
+    //need transform null to '' for formik initial values
+    for(let[key,val] of Object.entries(response.contacts)){
+   
+      if(val === null){
+        response.contacts[key] = '';
+      }
+    }
     dispatch(setUserProfile(response));
     
   };
@@ -112,7 +120,7 @@ export const updateStatus = (status) => {
 export const savePhoto = (file)=>{
   return async (dispatch)=>{
     let data = await profileAPI.savePhoto(file);
-   
+    
     if(data.resultCode === 0 ){
       //put return data.photos
       let photos = data.data.photos;
@@ -123,5 +131,31 @@ export const savePhoto = (file)=>{
 
   }
 }
+
+export const saveProfile = (profile,setStatus,setErrors)=>{
+  return async (dispatch,getState)=>{
+    let state  = getState();
+    let response = await profileAPI.saveProfile(profile);
+
+   
+    if(response.resultCode === 0 ){
+
+      dispatch(getUserProfile(state.auth.userId));
+     
+    }else{
+      console.log(response.messages);
+      //general error for form 
+      setStatus({msg:response.messages[0]});
+      //errors from fields 
+      setErrors({contacts:{facebook:"error"}});
+       
+      return Promise.reject(response.messages);
+    }
+
+
+  }
+}
+
+
 
 export default profileReducer;

@@ -2,11 +2,12 @@
     padding: 10px;
 }
 .profileInfoContainer{
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
+    /* align-items: center; */
     padding: 15px;
-    align-items: center;
+   
 }
 .profileInfoContainer>div{
     margin-left: 15px;
